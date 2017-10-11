@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Rock Paper Scissors</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+<div id="output" class='row text-center text-capitalize'></div>
+<div class="row">
+<div class='col-xs-6'><h1>Player 1</h1><div id='eply1' class='btn btn-danger'>Player 1</div><div class='jumbotron text-center'>1</div></div>
+<div class='col-xs-6'><h1>Player 2</h1><div id='eply2' class='btn btn-primary'>Player 2</div><div class='jumbotron text-center'>2</div></div>
+</div>
+</div>
+  
+<script>
+var btnone = document.getElementById('eply1');
+var btntwo = document.getElementById('eply2');
+var output = document.getElementById('output');
+	
+var picks = [0,0];
+	
+btnone.onclick = function(e){ takeaturn(e);};
+btntwo.onclick = function(e){ takeaturn(e);};
+
+var myArray = ['Rock', 'Paper', 'Scissors'];
+
+function takeaturn(e){
+	var gameplay = randpick();
+	e.srcElement.nextSibling.innerHTML = myArray[gameplay];
+	if(e.srcElement.id == 'eply1'){
+		picks[0] = gameplay + 1;
+	} else {
+		picks[1] = gameplay + 1;
+	}
+	winner();
+};
+	
+function randpick(){
+	return Math.floor(Math.random() * myArray.length);
+};
+	
+function winner(){
+	var one = picks[0];
+	var two = picks[1];
+	var newoutput = 'nothing';
+
+	if (one == two){newoutput = 'tie game';} 
+	else if (one == 1 && two == 3) { newoutput = 'Player 1 wins';} 
+	else if (one == 2 && two == 1) { newoutput = 'Player 1 wins';} 
+	else if (one == 2 && two == 3) { newoutput = 'Player 2 wins';} 
+	else if (one == 3 && two == 1) { newoutput = 'Player 2 wins';} 
+	else if (one == 3 && two == 2) { newoutput = 'Player 1 wins';} 
+	else { newoutput = 'No winner'; }
+	htmloutput(newoutput);
+};
+	
+function htmloutput(myoutput){
+	output.innerHTML = myoutput;
+};
+  
+</script>
+</body>
+
+</html>
